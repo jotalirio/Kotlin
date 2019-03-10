@@ -23,10 +23,15 @@ fun main(args: Array<String>) {
         employee2 = Employee(2, "Sarah Lopez")
     }
 
+    // mutable Set
     val employees: EmployeeSet
     employees = mutableSetOf()
     employees.add(employee1)
     employees.forEach { println("id: " + it.id + ", " + "name: " + it.name) }
+
+    // immutable ArrayList
+    val names = arrayListOf("Jose", "Luis", "Sarah")
+    print(names[1]) // Indexing the ArrayList without using .get() just like we usually do with Arrays in Java
 
 }
 
