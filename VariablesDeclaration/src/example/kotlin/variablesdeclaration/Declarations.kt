@@ -1,5 +1,6 @@
 package example.kotlin.variablesdeclaration
 
+typealias EmployeeSet = Set<Employee>
 
 fun main(args: Array<String>) {
 
@@ -22,6 +23,9 @@ fun main(args: Array<String>) {
         employee2 = Employee(2, "Sarah Lopez")
     }
 
+    val employees: EmployeeSet
+
+    
 }
 
 class Employee(val id: Int, var name: String) {
