@@ -24,8 +24,10 @@ fun main(args: Array<String>) {
     }
 
     val employees: EmployeeSet
+    employees = mutableSetOf()
+    employees.add(employee1)
+    employees.forEach { println("id: " + it.id + ", " + "name: " + it.name) }
 
-    
 }
 
 class Employee(val id: Int, var name: String) {
