@@ -52,6 +52,15 @@ fun main(args: Array<String>) {
     println(employeeFour !== employeeTwo)
     println(employeeTwo === employeeThree)
     println(employeeTwo === employeeThree)
+
+    // instanceOf and Smart casting
+    var something: Any = employeeFour
+    if(something is Employee) {
+        // val newEmployee = something as Employee
+        something = employeeOne
+        // something = "hello"
+        println(something.name)
+    }
 }
 
 class Employee(val id: Int, var name: String) {
