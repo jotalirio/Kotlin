@@ -61,6 +61,23 @@ fun main(args: Array<String>) {
         // something = "hello"
         println(something.name)
     }
+
+    // String templates
+    val employeeFive = Employee(27, "Paula")
+    println(employeeFive)
+
+    val change = 4.22
+    println("To show the value change, we use \$change")
+    println("To show the value change, we use $change")
+    println("To show the value change, we use $")
+    println("To show the value change, we use $$change")
+
+    val numerator = 10.99
+    val denominator = 20.00
+    println("The value of $numerator divided by $denominator is ${numerator / denominator}")
+
+    println("The employee´s id is ${employeeFive.id}")
+
 }
 
 class Employee(val id: Int, var name: String) {
@@ -71,4 +88,16 @@ class Employee(val id: Int, var name: String) {
         }
         return false
     }
- }
+
+    override fun hashCode(): Int {
+        var result = id
+        result = 31 * result + name.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "Employee(id=$id, name='$name')"
+    }
+
+
+}
