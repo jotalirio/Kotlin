@@ -75,8 +75,34 @@ fun main(args: Array<String>) {
     val numerator = 10.99
     val denominator = 20.00
     println("The value of $numerator divided by $denominator is ${numerator / denominator}")
-
     println("The employee´s id is ${employeeFive.id}")
+    println()
+
+    // Raw strings
+    // val filePath1 = "C:\somedir1\somedir2"
+    val filePath2 = "C:\\somedir1\\somedir2"
+    val filePath3 = """C:\somedir1\somedir2"""
+    println(filePath3)
+    val eggName = "Humpty"
+    val nurseryRhyme1 = """$eggName Dumpty sat on the wall
+                        |Humbty Dumty had a great fall
+                        |All the king´s horses and all the king´s men
+                        |Couldn´t put Humpty together again.""".trimMargin()
+    println(nurseryRhyme1)
+    println()
+    val nurseryRhyme2 = """$eggName Dumpty sat on the wall
+                        *Humbty Dumty had a great fall
+                        *All the king´s horses and all the king´s men
+                        *Couldn´t put Humpty together again.""".trimMargin("*")
+    println(nurseryRhyme2)
+    println()
+    val nurseryRhyme3 = """$eggName Dumpty sat on the wall
+                        *Humbty Dumty had a great fall
+                        *All the king´s horses and all the king´s men
+                        *Couldn´t put Humpty together again."""
+    println(nurseryRhyme3)
+    println()
+
 
 }
 
