@@ -51,7 +51,7 @@ fun main(args: Array<String>) {
     println(employeeFour != employeeTwo)
     println(employeeFour !== employeeTwo)
     println(employeeTwo === employeeThree)
-    println(employeeTwo === employeeThree)
+    println(employeeTwo !== employeeThree)
 
     // instanceOf and Smart casting
     var something: Any = employeeFour
