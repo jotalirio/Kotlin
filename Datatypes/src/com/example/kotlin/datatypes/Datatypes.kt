@@ -53,6 +53,7 @@ fun main(args: Array<String>) {
     // there is no automatic conversion done for us
     print(myCharInt.toChar())
 
-
+    /*** Boolean data type ***/
+    val myBoolean = true
 
 }
