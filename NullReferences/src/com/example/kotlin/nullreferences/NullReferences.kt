@@ -66,7 +66,8 @@ fun main(args: Array<String>) {
 
 
     // Not null assertion
-    val str5: String? = null
+    // val str5: String? = null
+    val str5: String? = "This is not nullable"
     val str6 = str5!!.toUpperCase()
 
     // This is what the not null assertion operator is doing:
@@ -87,6 +88,24 @@ fun main(args: Array<String>) {
     val anotherStr = "This is not nullable"
     println(str4 == anotherStr)
 
+
+    // Nullable arrays
+    val nullableInts = arrayOfNulls<Int?>(5)
+    println("Printing nullableInts array: ")
+    for (i in nullableInts) {
+        println(i)
+    }
+    // The common function over a Int are not available because the null values
+    println(nullableInts[3].toString())
+
+    // This is equivalent
+    val nullableInts2 = arrayOfNulls<Int>(5)
+    println("Printing nullableInts2 array: ")
+    for (i in nullableInts2) {
+        println(i)
+    }
+    // The common function over a Int are not available because the null values
+    println(nullableInts2[3].toString())
 }
 
 fun printText(text: String) {
