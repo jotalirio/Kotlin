@@ -1,5 +1,7 @@
 package com.example.kotlin.datatypes
 
+import com.example.kotlin.javacode.DummyClass
+
 
 fun main(args: Array<String>) {
 
@@ -56,4 +58,11 @@ fun main(args: Array<String>) {
     /*** Boolean data type ***/
     val myBoolean = true
 
+
+    /*** Instantiating DummyClass java class ***/
+
+    val vacationTime = false
+    val onVacation = DummyClass().isVacationTime(vacationTime)
+    println()
+    println(onVacation)
 }
