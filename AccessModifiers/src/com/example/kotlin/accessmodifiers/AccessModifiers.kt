@@ -13,17 +13,43 @@ fun main(args: Array<String>) {
 
     // 6. Adding a secondary constructor
     // 7. Assigning default value in constructor parameters
-    val emp2 = Employee("Joe")
-    println(emp2.firstName)
-    println(emp2.fullTime)
+    // val emp2 = Employee("Joe")
+    // println(emp2.firstName)
+    // println(emp2.fullTime)
 
-    val emp3 = Employee("Jane", false)
-    println(emp3.firstName)
-    println(emp3.fullTime)
-
+    // val emp3 = Employee("Jane", false)
+    // println(emp3.firstName)
+    // println(emp3.fullTime)
+    // println("Changing the fullTime for Jane from false to true....")
+    // emp3.fullTime = true
+    // println(emp3.firstName)
+    // println(emp3.fullTime)
 
     // 8. We do not have a primary constructor but we have a secondary one
     println(Demo().dummy)
+
+    // 9. Making the fullTime property private
+    // val emp4 = Employee("James")
+    // println(emp4.firstName) // Doing that we are using the default getter provided by Kotlin
+    // println(emp4.fullTime)  // The getter is now private and we cannot access to it
+
+    // 10. Backing fields.  Declaring custom getters and setters. In this case the property cannot be part of the primary constructor
+    val emp5 = Employee("James")
+    println(emp5.firstName)
+    println(emp5.fullTime)  // We are calling the custom get() getter
+    println("Changing the fullTime for James from true to false....")
+    emp5.fullTime = false   // We are calling the custom set() setter
+    println(emp5.fullTime)
+
+    // 11. Backing fields. Not allowing to change the value for the fullTime property
+    // val emp6 = Employee("Patric")
+    // println(emp6.firstName)
+    // println(emp6.fullTime)  // We are calling the custom get() getter
+    // println("Changing the firstName for Patric from Patric to Thomas....")
+    // emp6.firstName = "Thomas"
+    // println("Changing the fullTime for Thomas from true to false....")
+    // emp6.fullTime = false   // We are calling the custom set() setter
+    // println(emp6.fullTime)
 }
 
 // 1. Long way
@@ -75,9 +101,9 @@ fun main(args: Array<String>) {
 
 
 // 7. Assigning default value in constructor parameters
-class Employee(val firstName: String, var fullTime: Boolean = true) {
-
-}
+//class Employee(val firstName: String, var fullTime: Boolean = true) {
+//
+//}
 
 
 // 8. We do not have a primary constructor but we have a secondary one. We can use default values in secondary constructor as well
@@ -89,3 +115,44 @@ class Demo {
         dummy = "Hello"
     }
 }
+
+
+// 9. Making the fullTime property private. Kotlin by default provide getters and setters for each property with the same visibility
+//    so if we make a property private then its getters and setters will be private as well and we would not be able to access to them
+//class Employee(val firstName: String, private var fullTime: Boolean = true) {
+//
+//}
+
+
+// 10. Backing fields.  Declaring custom getters and setters. In this case the property cannot be part of the primary constructor
+class Employee(val firstName: String, fullTime: Boolean = true) {
+
+    // At this point, Kotlin would provide the default getter and setter as well
+    // Declaring a backing fields
+    var fullTime = fullTime
+    get() {
+        println("Running the custom get...")
+        return field
+    }
+    set(value) {
+        println("Running the custom set...")
+        field = value
+    }
+}
+
+
+// 11. Backing fields. Not allowing to change the value for the fullTime property
+//class Employee(var firstName: String, fullTime: Boolean = true) {
+//
+//    // At this point, Kotlin would provide the default getter and setter as well
+//    // Declaring a backing fields
+//    var fullTime = fullTime
+//    get() {
+//        println("Running the custom get...")
+//        return field
+//    }
+//    private set(value) {
+//        println("Running the custom set...")
+//        field = value
+//    }
+//}
