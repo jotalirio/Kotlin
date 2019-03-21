@@ -1,6 +1,9 @@
 package com.example.kotlin.accessmodifiers
 
 
+
+val MY_CONSTANT = 100
+
 fun main(args: Array<String>) {
 
     // 1. Long way
@@ -50,6 +53,24 @@ fun main(args: Array<String>) {
     // println("Changing the fullTime for Thomas from true to false....")
     // emp6.fullTime = false   // We are calling the custom set() setter
     // println(emp6.fullTime)
+
+    // 12. Constants
+    println("MY_CONSTANT: $MY_CONSTANT")
+
+    // 13. Data classes
+    val car = Car("blue", "Toyota", 2015)
+    println(car) // Default toString() function provided by Data classes
+    println(emp5)
+    val emp7 = Employee("Jonas")
+    val emp7Bis = Employee("Jonas")
+    println(emp7 == emp7Bis) // False: Is comparing references because the equals() method is not implemented in order to do an structural equality
+    val carBis = Car("blue", "Toyota", 2015)
+    println(car == carBis) // True: is making a structural equality because Data classes provide us a default equals() function
+    val car2 = car.copy()
+    println(car2)
+    val car3 = car.copy(color = "yellow")
+    println(car3)
+    val car4 = car.copy(year = 2014, color = "green") // We are indicating the arguments name so the order does not care
 }
 
 // 1. Long way
@@ -156,3 +177,14 @@ class Employee(val firstName: String, fullTime: Boolean = true) {
 //        field = value
 //    }
 //}
+
+
+// 13. Data class provide us getters() and setters(), copy(), a custom implementation of equals() and hashcode() and toString() functions by default.
+// We can override them and then our versions of these functions will be used
+// The primary constructor has to have at least one parameter and all parameters have to be val or var. We cannot have regular parameters (parameters without val or var)
+// Data classes cannot be abstract, sealed or inner classes
+// We can have properties not included in the primary constructor but Kotlin is not going to include them into the default functions: copy(), equals() and hashcode()
+// Kotlin is not going to take these properties into account so it is better to have them into the primary constructor signature
+data class Car(val color: String, val model: String, val year: Int) {
+
+}
