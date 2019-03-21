@@ -41,6 +41,11 @@ fun main(args: Array<String>) {
         println(c)
     }
 
+    // 10. Extension functions. A good use case is when we have a lot of auxiliary functions to manipulate Strings
+    println(Utils().upperFirstAndLast("this is all in lowercase"))
+    val str = "this is all in lowercase"
+    println(str.upperFirstAndLast())
+
 }
 
 // 1. Function with block body
@@ -105,4 +110,18 @@ fun printColor(vararg  cars: Car) {
     for (car in cars) {
         println(car.color)
     }
+}
+
+
+// 10. Extension functions. A good use case is when we have a lot of auxiliary functions to manipulate Strings
+//fun String.upperFirstAndLast(): String {
+//    val upperFirst = this.substring(0, 1).toUpperCase() + this.substring(1)
+//    return upperFirst.substring(0, upperFirst.length - 1) + upperFirst.substring(upperFirst.length - 1).toUpperCase()
+//}
+
+
+// We can remove this.
+fun String.upperFirstAndLast(): String {
+    val upperFirst = substring(0, 1).toUpperCase() + substring(1)
+    return upperFirst.substring(0, upperFirst.length - 1) + upperFirst.substring(upperFirst.length - 1).toUpperCase()
 }
