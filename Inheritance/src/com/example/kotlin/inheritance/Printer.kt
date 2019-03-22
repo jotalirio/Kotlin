@@ -11,8 +11,8 @@ fun main(args: Array<String>) {
 //    laserPrinter.printModel()
 
     // 9. The primary constructor signatures for the parent and child classes don not have to match
-    val laserPrinter = LaserPrinter("Stylus Color 450", 15)
-    laserPrinter.printModel()
+//    val laserPrinter = LaserPrinter("Stylus Color 450", 15)
+//    laserPrinter.printModel()
 
     // 10. Secondary constructors
     SomethingElse("whatever")
@@ -133,23 +133,23 @@ fun main(args: Array<String>) {
 
 
 // 9. The primary constructor signatures for the parent and child classes don not have to match
-abstract class Printer(val modelName: String) {
-
-    open fun printModel() = println("The model name of this printer is '$modelName'")
-    abstract fun bestSellingPrice(): Double
-}
-
-open class LaserPrinter(modelName: String, ppm: Int): Printer(modelName) {
-
-    // Adding the 'final' keyword to this method, subclasses cannot override it
-    final override fun printModel() = println("The model name of this laser printer is '$modelName'")
-    override fun bestSellingPrice(): Double = 129.99
-
-}
-
-class SpecialLaserPrinter(modelName: String, ppm: Int, year: Int): LaserPrinter(modelName, ppm) {
-
-}
+//abstract class Printer(val modelName: String) {
+//
+//    open fun printModel() = println("The model name of this printer is '$modelName'")
+//    abstract fun bestSellingPrice(): Double
+//}
+//
+//open class LaserPrinter(modelName: String, ppm: Int): Printer(modelName) {
+//
+//    // Adding the 'final' keyword to this method, subclasses cannot override it
+//    final override fun printModel() = println("The model name of this laser printer is '$modelName'")
+//    override fun bestSellingPrice(): Double = 129.99
+//
+//}
+//
+//class SpecialLaserPrinter(modelName: String, ppm: Int, year: Int): LaserPrinter(modelName, ppm) {
+//
+//}
 
 
 // 10. We cannot call a super secondary constructor if you have a primary constructor because every constructor has to
@@ -158,22 +158,22 @@ class SpecialLaserPrinter(modelName: String, ppm: Int, year: Int): LaserPrinter(
 // after the Child's constructor. So we can only really call a Super class secondary constructor when no primary constructor
 // are involved
 
-open class Something {
-
-    val someProperty: String
-
-    constructor(someParameter: String) {
-        someProperty = someParameter
-        println("I am in the Parent's constructor")
-    }
-}
-
-class SomethingElse: Something {
-
-    constructor(someOtherParameter: String): super(someOtherParameter) {
-        println("I am in the Child's constructor")
-    }
-}
+//open class Something {
+//
+//    val someProperty: String
+//
+//    constructor(someParameter: String) {
+//        someProperty = someParameter
+//        println("I am in the Parent's constructor")
+//    }
+//}
+//
+//class SomethingElse: Something {
+//
+//    constructor(someOtherParameter: String): super(someOtherParameter) {
+//        println("I am in the Child's constructor")
+//    }
+//}
 
 // 10.1. We can see most of the time we only want a primary constructor and we really only want to start adding
 // secondary constructors when it's absolutely necessary. We can see we can quickly get into trouble if we start tying
@@ -201,3 +201,85 @@ class SomethingElse: Something {
 //open data class DataClass (val number: Int) {
 //
 //}
+
+
+// 12. Interfaces.
+// We do not need to use the 'open' keyword to extend an interface
+interface MyInterface {
+
+    // This property is abstract because we have not assigned it an initial value
+    val number: Int
+
+    // We can initialize properties within interfaces
+    // val number2: Int = 50
+
+    // We can solve the above situation using a get()
+    val number3: Int
+        get() = 45
+
+    val number4: Int
+        get() = number * 100
+
+    // Backing fields are not allowed
+//    val number5: Int
+//        get() = field * 100
+    
+
+    fun myFunction(str: String): String
+}
+
+interface MySubInterface: MyInterface {
+
+    fun mySubFunction(num: Int): String
+}
+
+open class Something: MySubInterface {
+
+    val someProperty: String
+    override val number: Int = 25
+
+    constructor(someParameter: String) {
+        someProperty = someParameter
+        println("I am in the Parent's constructor")
+    }
+
+    override fun myFunction(str: String): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun mySubFunction(num: Int): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
+
+class SomethingElse: Something {
+
+    constructor(someOtherParameter: String): super(someOtherParameter) {
+        println("I am in the Child's constructor")
+    }
+}
+
+abstract class Printer(val modelName: String) {
+
+    open fun printModel() = println("The model name of this printer is '$modelName'")
+    abstract fun bestSellingPrice(): Double
+}
+
+open class LaserPrinter(modelName: String, ppm: Int): Printer(modelName), MyInterface {
+
+    override val number: Int = 25
+    override val number3: Int = 75
+    override val number4: Int = 55
+
+    // Adding the 'final' keyword to this method, subclasses cannot override it
+    final override fun printModel() = println("The model name of this laser printer is '$modelName'")
+    override fun bestSellingPrice(): Double = 129.99
+
+    override fun myFunction(str: String): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
+
+class SpecialLaserPrinter(modelName: String, ppm: Int, year: Int): LaserPrinter(modelName, ppm) {
+
+}
