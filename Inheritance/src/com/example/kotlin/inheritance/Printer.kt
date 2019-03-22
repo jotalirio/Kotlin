@@ -6,8 +6,16 @@ fun main(args: Array<String>) {
     // 5. Adding method printModel()
     // 6. Overriding the printModel() method in the subclass
     // 7. Adding an abstract method.
-    val laserPrinter = LaserPrinter("Stylus Color 450")
+    // 8. Using explicitly the 'final' keyword.
+//    val laserPrinter = LaserPrinter("Stylus Color 450")
+//    laserPrinter.printModel()
+
+    // 9. The primary constructor signatures for the parent and child classes don not have to match
+    val laserPrinter = LaserPrinter("Stylus Color 450", 15)
     laserPrinter.printModel()
+
+    // 10. Secondary constructors
+    SomethingElse("whatever")
 }
 
 
@@ -84,17 +92,112 @@ fun main(args: Array<String>) {
 
 // 7. Adding an abstract method. Abstract method are 'open' by default. When a method is abstract we do not have to use
 // the 'open' keyword but we still have to use the 'override' keyword
+//abstract class Printer(val modelName: String) {
+//
+//    // Methods are by default public and static so we have to use the 'open' keyword to override methods
+//    open fun printModel() = println("The model name of this printer is '$modelName'")
+//    abstract fun bestSellingPrice(): Double
+//}
+//
+//class LaserPrinter(modelName: String): Printer(modelName) {
+//
+//    override fun printModel() = println("The model name of this laser printer is '$modelName'")
+//    override fun bestSellingPrice(): Double = 129.99
+//
+//}
+
+
+// 8. Using explicitly the 'final' keyword. 'Override' keyword is saying that the method is still open so subclasses can continue override that method.
+// So if we want to avoid that we have to use the 'final' keyword
+//abstract class Printer(val modelName: String) {
+//
+//    // Methods are by default public and static so we have to use the 'open' keyword to override methods
+//    open fun printModel() = println("The model name of this printer is '$modelName'")
+//    abstract fun bestSellingPrice(): Double
+//}
+//
+//// Now we want that all LaserPrinter subclass use the original printModel() method from the LaserPrint class
+//open class LaserPrinter(modelName: String): Printer(modelName) {
+//
+//    // Adding the 'final' keyword to this method, subclasses cannot override it
+//    final override fun printModel() = println("The model name of this laser printer is '$modelName'")
+//    override fun bestSellingPrice(): Double = 129.99
+//
+//}
+//
+//class SpecialLaserPrinter(modelName: String): LaserPrinter(modelName) {
+//
+//    // uncomment the line to see the compiler error
+//    // override fun printModel() = println("this is my way of doing it")
+//}
+
+
+// 9. The primary constructor signatures for the parent and child classes don not have to match
 abstract class Printer(val modelName: String) {
 
-    // Methods are by default public and static so we have to use the 'open' keyword to override methods
     open fun printModel() = println("The model name of this printer is '$modelName'")
     abstract fun bestSellingPrice(): Double
 }
 
-class LaserPrinter(modelName: String): Printer(modelName) {
+open class LaserPrinter(modelName: String, ppm: Int): Printer(modelName) {
 
-    override fun printModel() = println("The model name of this laser printer is '$modelName'")
-
+    // Adding the 'final' keyword to this method, subclasses cannot override it
+    final override fun printModel() = println("The model name of this laser printer is '$modelName'")
     override fun bestSellingPrice(): Double = 129.99
 
 }
+
+class SpecialLaserPrinter(modelName: String, ppm: Int, year: Int): LaserPrinter(modelName, ppm) {
+
+}
+
+
+// 10. We cannot call a super secondary constructor if you have a primary constructor because every constructor has to
+// delegate to the primary constructor so calling a super secondary constructor only makes sense if you do not have a
+// primary constructor and if you do not you would call one of the Super secondary constructors by adding : in super()
+// after the Child's constructor. So we can only really call a Super class secondary constructor when no primary constructor
+// are involved
+
+open class Something {
+
+    val someProperty: String
+
+    constructor(someParameter: String) {
+        someProperty = someParameter
+        println("I am in the Parent's constructor")
+    }
+}
+
+class SomethingElse: Something {
+
+    constructor(someOtherParameter: String): super(someOtherParameter) {
+        println("I am in the Child's constructor")
+    }
+}
+
+// 10.1. We can see most of the time we only want a primary constructor and we really only want to start adding
+// secondary constructors when it's absolutely necessary. We can see we can quickly get into trouble if we start tying
+// to split the responsibility between the primary and secondary constructors
+//open class Something(val x: Int) {
+//
+//    val someProperty: String = "lalalala"
+//
+//    constructor(someParameter: String, y: Int): this(y) {
+//        someProperty = someParameter
+//    }
+//}
+//
+//class SomethingElse: Something {
+//
+//    constructor(someOtherParameter: String, z: Int): super(z)
+//}
+
+
+// 11. Data classes. We cannot extend data Classes because they are closed tight so they cannot be extended. In fact they
+// can even be abstract or inner classes because that would not make sense. Right if a data class exists just to store state
+// then it does not make sense to have it as an abstract or inner class.
+//
+// They can extend other classes but when it comes to inheritance the buck stops right with them
+//open data class DataClass (val number: Int) {
+//
+//}
