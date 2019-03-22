@@ -223,7 +223,7 @@ interface MyInterface {
     // Backing fields are not allowed
 //    val number5: Int
 //        get() = field * 100
-    
+
 
     fun myFunction(str: String): String
 }
@@ -283,3 +283,12 @@ open class LaserPrinter(modelName: String, ppm: Int): Printer(modelName), MyInte
 class SpecialLaserPrinter(modelName: String, ppm: Int, year: Int): LaserPrinter(modelName, ppm) {
 
 }
+
+
+// 13. Singletons in Kotlin.
+// In Kotlin there is a way to declare a class and define an instance at the same time using the 'object' keyword
+// Now, there are three typical uses for the 'object' keyword:
+
+//      - Singletons
+//      - Companion objects
+//      - Objects expressions
