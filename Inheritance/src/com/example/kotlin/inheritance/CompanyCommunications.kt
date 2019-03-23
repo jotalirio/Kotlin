@@ -73,13 +73,13 @@ fun main(args: Array<String>) {
 
 // We can add properties and functions but we cannot have any constructors because an object declaration declares
 // and creates an instance at the same time so having constructors would not make sense
-object CompanyCommunications {
-
-    val currentYear = Year.now().value
-
-    fun getTagLine() = "Our company rocks!"
-    fun getCopyrightLine() = "Copyright \u00A9 $currentYear Our Company. All rights reserved."
-}
+//object CompanyCommunications {
+//
+//    val currentYear = Year.now().value
+//
+//    fun getTagLine() = "Our company rocks!"
+//    fun getCopyrightLine() = "Copyright \u00A9 $currentYear Our Company. All rights reserved."
+//}
 
 
 // 14. Companion objects
@@ -183,3 +183,19 @@ fun String.upperFirstAndLast(): String {
     val upperFirst = substring(0, 1).toUpperCase() + substring(1)
     return upperFirst.substring(0, upperFirst.length - 1) + upperFirst.substring(upperFirst.length - 1).toUpperCase()
 }
+
+
+// 18. Internal access modifiers. Only the members with this access modifier will be accessible from the same module
+object CompanyCommunications {
+
+    val currentYear = Year.now().value
+
+    fun getTagLine() = "Our company rocks!"
+    fun getCopyrightLine() = "Copyright \u00A9 $currentYear Our Company. All rights reserved."
+
+    // This method will not be accessible from another module: AnotherModuleFile.kt in this case but it will be accessible
+    // from AnotherFile.kt
+    internal fun getCopyrightLineBis() = "Copyright \u00A9 $currentYear Our Company. All rights reserved."
+
+}
+

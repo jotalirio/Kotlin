@@ -16,5 +16,5 @@ fun main(args: Array<String>) {
     println(IT.getDeptInfo())
     println(SALES.getDeptInfo())
     println("some string".ufal())
-
+    
 }
