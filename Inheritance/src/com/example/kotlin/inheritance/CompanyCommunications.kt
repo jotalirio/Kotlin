@@ -32,6 +32,28 @@ fun main(args: Array<String>) {
     // val anyClass3 = AnyClass()
 
 
+    // 15. Object expressions which are essentially 'Anonymous objects'
+    // We are using an object expression to call the 'mustImplement()' function
+    // When se want to use object expression, the instance that is created is NOT a Singleton, it is used and it is discarded each time
+    // Also unlike in Java the object expression inside here can access variables from outside it, local variables and these
+    // variables do not have to be final (they do not have to be 'val' variables, they can also be 'var' variables)
+    wantsSomeInterface(object: SomeInterface {
+        override fun mustImplement(num: Int) = "This is from mustImplement() implemented by an anonymous object: ${num * 100}"
+    })
+
+    // Also unlike in Java the object expression inside here can access variables from outside it, local variables and these
+    // variables do not have to be final (they do not have to be 'val' variables, they can also be 'var' variables)
+    var thisIsMutable = 45
+    wantsSomeInterface(object: SomeInterface{
+        override fun mustImplement(num: Int): String {
+            thisIsMutable++
+            return "This is from mustImplement: ${num * 100}"
+        }
+    })
+    println("thisIsMutable: $thisIsMutable")
+
+    // We can also assign object expressions to variables and they can implement multiples interfaces which we cannot do in Java
+    // so if we have another interface we can do it
 }
 
 
@@ -122,3 +144,16 @@ class AnyClass private constructor(val someString: String) {
         }
     }
 }
+
+
+// 15. Object expressions which are essentially 'Anonymous objects'
+interface SomeInterface {
+
+    fun mustImplement(num: Int): String
+}
+
+
+fun wantsSomeInterface(si: SomeInterface) {
+    println("Printin from wantsSomeInterface ${si.mustImplement(22)}")
+}
+
