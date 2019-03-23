@@ -174,3 +174,12 @@ enum class Department(val fullName: String, val numEmployees: Int) {
     fun getDeptInfo() = "The $fullName department has $numEmployees employees"
 }
 
+
+// 17. Imports
+
+fun topLevel(str: String) =  println("Top level function: $str")
+
+fun String.upperFirstAndLast(): String {
+    val upperFirst = substring(0, 1).toUpperCase() + substring(1)
+    return upperFirst.substring(0, upperFirst.length - 1) + upperFirst.substring(upperFirst.length - 1).toUpperCase()
+}
