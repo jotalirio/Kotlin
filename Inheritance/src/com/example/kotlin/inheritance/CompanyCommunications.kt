@@ -54,6 +54,10 @@ fun main(args: Array<String>) {
 
     // We can also assign object expressions to variables and they can implement multiples interfaces which we cannot do in Java
     // so if we have another interface we can do it
+
+
+    // 16. Enums.
+    println(Department.ACCOUNTING.getDeptInfo())
 }
 
 
@@ -155,5 +159,18 @@ interface SomeInterface {
 
 fun wantsSomeInterface(si: SomeInterface) {
     println("Printin from wantsSomeInterface ${si.mustImplement(22)}")
+}
+
+
+// 16. Enums.
+// We use 'enum class' to declare enums
+enum class Department(val fullName: String, val numEmployees: Int) {
+
+    HR("Human Resources", 5),
+    IT("Information Technology", 10),
+    ACCOUNTING("Accounting", 3),
+    SALES("Sales", 20); // We need the semicolon here, before the functions
+
+    fun getDeptInfo() = "The $fullName department has $numEmployees employees"
 }
 
