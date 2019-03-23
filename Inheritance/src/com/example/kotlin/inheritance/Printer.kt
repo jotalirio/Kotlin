@@ -265,7 +265,8 @@ abstract class Printer(val modelName: String) {
     abstract fun bestSellingPrice(): Double
 }
 
-open class LaserPrinter(modelName: String, ppm: Int): Printer(modelName), MyInterface {
+open class LaserPrinter(modelName: String, ppm: Int): Printer(modelName),
+    MyInterface {
 
     override val number: Int = 25
     override val number3: Int = 75
